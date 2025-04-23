@@ -1,0 +1,8 @@
+name = "formalize"
+pages_build_output_dir = "./dist"
+
+[[d1_databases]]
+binding = "FormalizeDB"
+database_name = "formalize"
+database_id = "59fe113e-d4ac-4ab8-8a11-74db3eb0155a"
+preview_database_id = "FormalizeDB"
