@@ -1,14 +1,15 @@
 import { D1Orm, DataTypes, Model } from "d1-orm";
+import { nanoid } from 'nanoid'
 
-export async function onRequest(context) {
-    const orm = new D1Orm(context.env.FormalizeDB);
+export async function onRequestPost(context) {
+    const orm = new D1Orm(context.env.FormalizeDB)
     const users = new Model(
         {
             D1Orm: orm,
             tableName: "Users",
             primaryKeys: "id",
             autoIncrement: "id",
-            uniqueKeys: [["uid","email"]],
+            uniqueKeys: [["email"]],
         },
         {
             id: {
@@ -36,16 +37,29 @@ export async function onRequest(context) {
                 notNull: true,
             },
         }
-    );
+    )
 
-    //const result = await users.CreateTable({ strategy: "force"});
-    const result = await users.InsertOne({
-        uid: "ABCD",
-        name: "Jonathan",
-        email: "jon@gmail.com",
-        password: "jon",
-        lastSeen: "yesterday"
-    })
-  
-    return Response.json(result);
+    const data = await context.request.json()
+    let date = new Date().toString()
+    const uid = nanoid()
+    const lastSeen = date.substring(0, date.indexOf("(") - 1)
+    try{
+        await users.InsertOne({
+            uid: uid,
+            name: data.name,
+            email: data.email,
+            password: data.password,
+            lastSeen: lastSeen,
+        })
+        return Response.json({
+            uid: uid,
+            name: data.name,
+            email: data.email
+        })
+    }catch(error){
+        return new Response({ error: "Email already in use" }, {
+            status: 409,
+            "Content-Type": "application/json"
+        })
+    }
 }

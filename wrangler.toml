@@ -1,5 +1,6 @@
 name = "formalize"
 pages_build_output_dir = "./dist"
+compatibility_date = "2025-04-24"
 
 [[d1_databases]]
 binding = "FormalizeDB"

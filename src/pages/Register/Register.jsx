@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom"
 import { FaBookOpen } from "react-icons/fa6";
-import "./LR.css"
+import "../Login/LR.css"
 import { Auth } from "../../api/auth/auth";
 
 const authProvider = new Auth()
 
-export default function Login(){
+export default function Register(){
     const [formData, setFormData] = useState({
+        name: "",
         email: "", 
         password: "",
     })
@@ -24,40 +25,42 @@ export default function Login(){
     async function onSubmit(e){
         e.preventDefault()
         try{
-            const response = await authProvider.loginUser(...Object.values(formData))
+            const response = await authProvider.createUser(...Object.values(formData))
         }catch(error){
             if(error.message === "Empty fields"){
 
             }else if(error.message === "Email not valid"){
 
-            }else if(error.message === "Wrong email or password"){
-                console.log("GG")
+            }else if(error.message === "Email already in use"){
+                
             }
         }
     }
 
     return (
         <>
-            <main className="lr-main">
-                <div className="desktop-hero"></div>
+            <main className="lr-main reverse-order">
+                <div className="desktop-hero hero2"></div>
                 <div className="form-container">
                     <span className="logo lr-logo">Formalize</span>
                     <form
                         onChange={handleChange}
                         onSubmit={onSubmit}
                     >
-                        <h1 className="lr-title">Welcome back!</h1>
-                        <h2 className="lr-subtitle">Please log in to continue.</h2>
+                        <h1 className="lr-title">Let's get to work!</h1>
+                        <h2 className="lr-subtitle">Please fill every field.</h2>
                         <div className="input-container">
+                            <label htmlFor="name">Name</label>
+                            <input type="text" name="name" id="name"/>
                             <label htmlFor="email">Email</label>
                             <input type="email" name="email" id="email"/>
                             <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password"/>
                         </div>
-                        <button className="lr-button">Enter Formalize</button>
+                        <button className="lr-button">Create account</button>
                         <span className="lr-span">
-                            Don't have an account? 
-                            <NavLink to="/register" className="lr-link">Register here.</NavLink>
+                            Already have an account? 
+                            <NavLink to="/register" className="lr-link">Login here.</NavLink>
                         </span>
                         <FaBookOpen className="top-left-icon" size={50}/>
                     </form>
