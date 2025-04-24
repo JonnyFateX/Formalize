@@ -1,10 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { FaBookOpen } from "react-icons/fa6";
 import "../Login/LR.css"
-import { Auth } from "../../api/auth/auth";
-
-const authProvider = new Auth()
+import { AuthContext } from "../../App.jsx"
 
 export default function Register(){
     const [formData, setFormData] = useState({
@@ -12,6 +10,7 @@ export default function Register(){
         email: "", 
         password: "",
     })
+    const auth = useContext(AuthContext)
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -25,7 +24,7 @@ export default function Register(){
     async function onSubmit(e){
         e.preventDefault()
         try{
-            const response = await authProvider.createUser(...Object.values(formData))
+            const response = await auth.createUser(...Object.values(formData))
         }catch(error){
             if(error.message === "Empty fields"){
 

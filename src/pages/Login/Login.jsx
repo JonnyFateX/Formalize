@@ -1,16 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom"
 import { FaBookOpen } from "react-icons/fa6";
 import "./LR.css"
-import { Auth } from "../../api/auth/auth";
-
-const authProvider = new Auth()
+import { AuthContext } from "../../App.jsx"
 
 export default function Login(){
     const [formData, setFormData] = useState({
         email: "", 
         password: "",
     })
+    const auth = useContext(AuthContext)
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -24,14 +23,14 @@ export default function Login(){
     async function onSubmit(e){
         e.preventDefault()
         try{
-            const response = await authProvider.loginUser(...Object.values(formData))
+            const response = await auth.loginUser(...Object.values(formData))
         }catch(error){
             if(error.message === "Empty fields"){
 
             }else if(error.message === "Email not valid"){
 
             }else if(error.message === "Wrong email or password"){
-                console.log("GG")
+                
             }
         }
     }
