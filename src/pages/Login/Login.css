@@ -5,10 +5,15 @@
     align-items: center;
 }
 
+.desktop-hero{
+    display: none;
+}
+
 .login-logo{
     font-size: 3rem;
     color: var(--main-color);
     margin: 0.5em 0;
+    text-align: center;
 }
 
 .form-container{
@@ -19,7 +24,7 @@
 }
 
 form{
-    height: 75vh;
+    height: 100%;
     width: 85vw;
     color: rgb(20, 20, 20);
     border-radius: 6px;
@@ -32,7 +37,7 @@ form{
 }
 
 .login-title{
-    margin-top: 0.5em;
+    margin-top: 0.75em;
     font-weight: 600;
 }
 
@@ -67,7 +72,7 @@ input{
 }
 
 .login-button{
-    margin-top: 0.25em;
+    margin-top: 0.5em;
     padding: 0.5em 0.5em;
     width: 100%;
     color: white;
@@ -80,7 +85,8 @@ input{
 }
 
 .register-span{
-    margin-top: auto;
+    margin-bottom: 0.75em;
+    margin-top: 1em;
     text-align: center;
     font-size: 1.25rem;
     font-weight: 400;
@@ -101,4 +107,41 @@ input{
     top: -20px;
     right: -12px;
     color: var(--secondary-color);
+}
+
+@media(min-width:700px){
+    form{
+        width: 70vw;
+    }
+}
+
+@media(min-width:1025px){
+    .login-title{
+        margin-top: 1em;
+    }
+    .login-logo{
+        align-self: self-start;
+        margin-left: 10%;
+    }
+    .form-container{
+        width: 50vw;
+        align-items: center;
+    }
+    form{
+        width: 80%;
+    }
+    .desktop-hero{
+        display: flex;
+        height: 90vh;
+        width: 50vw;
+        background: url("../../assets/library-wallpaper.jpeg");
+        background-position: center;
+        background-size: 80%;
+        border-radius: 12px;
+    }
+    .login-main{
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+    }
 }

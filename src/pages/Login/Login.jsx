@@ -11,8 +11,9 @@ export default function Login(){
     return (
         <>
             <main className="login-main">
-                <span className="logo login-logo">Formalize</span>
+                <div className="desktop-hero"></div>
                 <div className="form-container">
+                    <span className="logo login-logo">Formalize</span>
                     <form>
                         <h1 className="login-title">Welcome back!</h1>
                         <h2 className="login-subtitle">Please log in to continue.</h2>
