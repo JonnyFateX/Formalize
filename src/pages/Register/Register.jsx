@@ -59,7 +59,7 @@ export default function Register(){
                         <button className="lr-button">Create account</button>
                         <span className="lr-span">
                             Already have an account? 
-                            <NavLink to="/register" className="lr-link">Login here.</NavLink>
+                            <NavLink to="/login" className="lr-link">Login here.</NavLink>
                         </span>
                         <FaBookOpen className="top-left-icon" size={50}/>
                     </form>

@@ -7,10 +7,13 @@
 
 :root{
   /* colors */
-  --main-color: #065321;
-  --secondary-color: #d03d5d;
-  /* --dark-background-color: #0D2818; */
+  --main-color: #08722e;
+  --secondary-color: #9b1168;
+  --text-color: #05441c;
+  --dark-background-color: #05441c;
   --background-color: #b7e5c9;
+  --white-background-color: rgb(229, 247, 229);
+  --hover-color: rgb(213, 230, 213);
   --section-background-color: #c8fbdb;
   /* #92817A */ 
 }

@@ -138,11 +138,13 @@ input{
         background-position: center;
         background-size: 80%;
         border-radius: 12px;
+        margin-left: 2em;
     }
 
     .hero2{
         background: url("../../assets/library-wallpaper2.jpg");
         background-position: 100%;
+        margin-right: 2em;
     }
     .lr-main{
         flex-direction: row;
