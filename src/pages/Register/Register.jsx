@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom"
 import { FaBookOpen } from "react-icons/fa6";
 import "../Login/LR.css"
@@ -11,6 +12,7 @@ export default function Register(){
         password: "",
     })
     const auth = useContext(AuthContext)
+    const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -25,6 +27,11 @@ export default function Register(){
         e.preventDefault()
         try{
             const response = await auth.createUser(...Object.values(formData))
+            if(response === "User Created"){
+                navigate("/login", {
+                    replace: true
+                })
+            }
         }catch(error){
             if(error.message === "Empty fields"){
 

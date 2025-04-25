@@ -1,10 +1,12 @@
 import { FaQuestion, FaCalendar, FaUser, FaLightbulb, FaPoll } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
 import { MaterialReactTable, useMaterialReactTable } from 'material-react-table';
-import { useMemo } from "react";
+import { useMemo, useContext } from "react";
 import './Home.css'
+import { AuthContext } from "../../App";
 
 export default function Home(){
+    const auth = useContext(AuthContext)
     const data = [
         {
             name: 'Quiz',
@@ -15,7 +17,7 @@ export default function Home(){
             quantity: 47,
         },
         {
-            name: 'Single Question',
+            name: 'Question',
             quantity: 32,
         },
         {
@@ -91,7 +93,7 @@ export default function Home(){
                 <h1 className="template-selection-title">Formalize it</h1>
                 <div className="templates">
                     <div className="template-container">
-                        <h2 className="template-title">Single question</h2>
+                        <h2 className="template-title">Question</h2>
                         <NavLink className="template-link"><FaQuestion className="template-icon"/></NavLink>
                     </div>
                     <div className="template-container">
@@ -124,7 +126,7 @@ export default function Home(){
                         <h2 className="your-template-title">Are you coming on Friday?</h2>
                     </NavLink>
                 </div>
-                <div className="section-container">
+                <div className="section-container table-container">
                     <MaterialReactTable table={table} />
                     <NavLink className="templates-link">Find all templates!</NavLink>
                 </div>

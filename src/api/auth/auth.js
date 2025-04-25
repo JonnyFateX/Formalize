@@ -1,11 +1,9 @@
 import * as EmailValidator from 'email-validator';
 
 export class User{
-    constructor(uid, name, email){
+    constructor(uid, name){
         this.uid = uid
         this.name = name
-        this.email = email
-
     }
 }
 
@@ -29,7 +27,12 @@ export class Auth{
                 body: JSON.stringify({name, email, password})
             })
             const jsonData = await response.json()
-            //return new User(jsonData.uid, name, email)
+            if(jsonData.uid){
+                return "User Created"
+            }else{
+                return "User Not Created"
+            }
+            
         }catch(e){
             throw new AuthError("Email already in use")
         }
@@ -47,8 +50,31 @@ export class Auth{
                 body: JSON.stringify({email, password})
             })
             const jsonData = await response.json()
+            if(jsonData.uid){
+                const user = new User(jsonData.uid, jsonData.name)
+                this.currentUser(user)
+                return user
+            }else{
+                return "Not Logged In"
+            }
+            
         }catch(error){
             throw new AuthError("Wrong email or password")
+        }
+    }
+
+    currentUser(user){
+        if(user){
+            localStorage.setItem("session", JSON.stringify(user))
+            return
+        }else{
+            const session = localStorage.getItem("session")
+            if(!session){
+                return null
+            }else{
+                const userJSON = JSON.parse(session)
+                return new User(userJSON.uid, userJSON.name)
+            }
         }
     }
 }

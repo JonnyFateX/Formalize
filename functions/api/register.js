@@ -54,7 +54,6 @@ export async function onRequestPost(context) {
         return Response.json({
             uid: uid,
             name: data.name,
-            email: data.email
         })
     }catch(error){
         return new Response({ error: "Email already in use" }, {

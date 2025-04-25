@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom"
 import { FaBookOpen } from "react-icons/fa6";
 import "./LR.css"
@@ -10,6 +11,7 @@ export default function Login(){
         password: "",
     })
     const auth = useContext(AuthContext)
+    const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData(prevFormData => {
@@ -24,6 +26,11 @@ export default function Login(){
         e.preventDefault()
         try{
             const response = await auth.loginUser(...Object.values(formData))
+            if(response !== "Not Logged In"){
+                navigate("/", {
+                    replace: true
+                })
+            }
         }catch(error){
             if(error.message === "Empty fields"){
 
